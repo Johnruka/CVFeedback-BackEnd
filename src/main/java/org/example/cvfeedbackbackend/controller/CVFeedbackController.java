@@ -1,18 +1,21 @@
 package org.example.cvfeedbackbackend.controller;
 
-import org.example.cvfeedbackbackend.repository.CVRepository;
 import org.example.cvfeedbackbackend.entity.CV;
+import org.example.cvfeedbackbackend.repository.CVRepository;
 import org.example.cvfeedbackbackend.service.AIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/cv-feedback")
-public class CVController {
+public class CVFeedbackController {
 
     @Autowired
-    private AIService service;
+    private AIService aiService;
 
     @Autowired
     private CVRepository cvRepository;
@@ -26,20 +29,15 @@ public class CVController {
         cv.setSkills(cv.getSkills());
         cv.setFeedback(cv.getFeedback());
 
-        String feedback = service.generateFeedback(cv.getFeedback());
+        String feedback = aiService.generateFeedback(cv.getFeedback());
         cv.setFeedback(feedback);
-        cvRepository.save(cv);
+        cvRepository.save(new CV());
         return ResponseEntity.ok(feedback);
 
-    }
-    @GetMapping("/feedback")
-    public String chat(@RequestParam String feedback) {
-        return  service.generateFeedback(feedback);
-    }
 
-    @GetMapping("/reactive-feedback")
-    public String reactiveChat(@RequestParam String feedback){
-        return service.generateFeedback(feedback);
+
     }
 
 }
+
+
