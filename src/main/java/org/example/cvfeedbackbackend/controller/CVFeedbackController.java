@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/cv-feedback")
+@RequestMapping("/api/cv-feedback/feedback")
 public class CVFeedbackController {
 
     @Autowired
@@ -20,24 +20,20 @@ public class CVFeedbackController {
     @Autowired
     private CVRepository cvRepository;
 
-    @PostMapping("/feedback")
+    @PostMapping
     public ResponseEntity<String> getFeedback(@RequestBody CV cv) {
-
         cv.setName(cv.getName());
+        cv.setEmail(cv.getEmail());
+        cv.setPhone(cv.getPhone());
         cv.setWorkExperience(cv.getWorkExperience());
         cv.setEducation(cv.getEducation());
         cv.setSkills(cv.getSkills());
         cv.setFeedback(cv.getFeedback());
-
         String feedback = aiService.generateFeedback(cv.getFeedback());
         cv.setFeedback(feedback);
         cvRepository.save(new CV());
         return ResponseEntity.ok(feedback);
-
-
-
     }
-
 }
 
 
