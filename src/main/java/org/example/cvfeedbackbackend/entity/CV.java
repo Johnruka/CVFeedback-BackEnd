@@ -17,6 +17,8 @@ public class CV {
     private Long id;
 
     private String name;
+    private String email;
+    private String phone;
     @Column(columnDefinition = "TEXT")
     private String workExperience;
     @Column(columnDefinition = "TEXT")
@@ -26,10 +28,13 @@ public class CV {
     private String feedback;
 
 
-    public CV(String name, String workExperience, String education, String skills) {
+    public CV(String name, String email, String phone, String workExperience, String education, String skills, String feedback) {
         this.name = name;
+        this.email = email;
+        this.phone = phone;
         this.workExperience = workExperience;
         this.education = education;
         this.skills = skills;
+        this.feedback = feedback;
     }
 }
