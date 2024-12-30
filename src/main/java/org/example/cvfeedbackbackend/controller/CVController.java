@@ -20,6 +20,7 @@ public class CVController {
 
     @PostMapping("/feedback")
     public ResponseEntity<String> getFeedback(@RequestBody CV cv) {
+        System.out.println("cv = " + cv);
         cv.setName(cv.getName());
         cv.setEmail(cv.getEmail());
         cv.setPhone(cv.getPhone());
@@ -30,6 +31,7 @@ public class CVController {
         String feedback = service.generateFeedback(cv.getFeedback());
         cv.setFeedback(feedback);
         cvRepository.save(cv);
+        System.out.println("feedback = " + feedback);
         return ResponseEntity.ok(feedback);
     }
 
