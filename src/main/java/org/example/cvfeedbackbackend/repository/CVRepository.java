@@ -1,4 +1,4 @@
-package org.example.cvfeedbackbackend;
+package org.example.cvfeedbackbackend.repository;
 
 import org.example.cvfeedbackbackend.entity.CV;
 import org.springframework.data.jpa.repository.JpaRepository;
