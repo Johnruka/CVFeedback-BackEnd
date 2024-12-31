@@ -21,11 +21,11 @@ public class CV {
     private String name;
     private String email;
     private String phone;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "Json")
     private String workExperience;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "Json")
     private String education;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "Json")
     private String skills;
     private String feedback;
 
